@@ -42,24 +42,30 @@ class App {
     }
 
     const url = getActiveRoute();
-    const page = routes[url];
+    const page = routes[url] || routes["/"] || routes["/login"];
+    if (!page) return;
+
     this.currentPage = page;
 
-    // cek support browser
-    if (!document.startViewTransition) {
+    try {
+      if (!document.startViewTransition) {
+        this.#content.innerHTML = await page.render();
+        await page.afterRender();
+        return;
+      }
+
+      const transition = document.startViewTransition(async () => {
+        this.#content.innerHTML = await page.render();
+        await page.afterRender();
+      });
+
+      await transition.finished;
+    } catch (error) {
+      console.warn("ViewTransition error or render error, fallback render:", error);
       this.#content.innerHTML = await page.render();
       await page.afterRender();
-      return;
     }
-
-    // pakai view transition
-    const transition = document.startViewTransition(async () => {
-      this.#content.innerHTML = await page.render();
-      await page.afterRender();
-    });
-
-    await transition.finished;
   }
 }
 
-export default App;
+export default class AppWrapper extends App {}

@@ -1,5 +1,5 @@
-const CACHE_NAME = "storyapp-v1";
-const DATA_CACHE_NAME = "storyapp-data-v1";
+const CACHE_NAME = "storyapp-v2";
+const DATA_CACHE_NAME = "storyapp-data-v2";
 
 const STATIC_ASSETS = [
   "/",
@@ -73,16 +73,37 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Strategy for Static Assets (App Shell): Cache First with Network Fallback
+  // Strategy for JS/CSS Assets: Network First with Cache Fallback
+  if (url.pathname.includes("/assets/")) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(request);
+        })
+    );
+    return;
+  }
+
+  // Strategy for Static App Shell: Network First falling back to Cache
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(request).catch(() => {
-        return caches.match("/index.html");
-      });
-    })
+    fetch(request)
+      .then((response) => {
+        if (response.status === 200) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
+        }
+        return response;
+      })
+      .catch(() => {
+        return caches.match(request).then((cached) => cached || caches.match("/index.html"));
+      })
   );
 });
 
