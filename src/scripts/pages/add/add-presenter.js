@@ -2,6 +2,7 @@ import L from "leaflet";
 import { addStory } from "../../data/api";
 import { OfflineStoryIdb } from "../../data/idb-helper";
 import { showToast } from "../../utils/toast";
+import { setupLeafletMarkerIcons } from "../../utils/map-icon";
 
 async function fileToSerializable(file) {
   if (!file) return null;
@@ -107,6 +108,7 @@ export default class AddPresenter {
     const mapContainer = document.getElementById("map");
     if (!mapContainer) return;
 
+    setupLeafletMarkerIcons();
     this.map = L.map("map").setView([-2.5, 118], 5);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(this.map);
 

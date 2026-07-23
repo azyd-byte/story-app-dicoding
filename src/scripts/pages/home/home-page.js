@@ -3,6 +3,7 @@ import HomePresenter from "./home-presenter";
 import template from "./home-view.html?raw";
 import { FavoriteStoryIdb } from "../../data/idb-helper";
 import { showToast } from "../../utils/toast";
+import { setupLeafletMarkerIcons } from "../../utils/map-icon";
 
 export default class HomePage {
   async render() {
@@ -39,6 +40,9 @@ export default class HomePage {
   async showStories(stories) {
     const container = document.querySelector("#story-list");
     if (!container) return;
+
+    // Setup Leaflet marker icons
+    setupLeafletMarkerIcons();
 
     // init map
     const map = L.map("map").setView([-2.5, 118], 5);
