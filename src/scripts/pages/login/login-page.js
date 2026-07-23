@@ -1,5 +1,59 @@
-import template from "./login-view.html?raw";
 import LoginPresenter from "./login-presenter";
+
+const template = `
+<section class="container" aria-labelledby="login-title">
+  <div class="form-card">
+    <h1 id="login-title">Selamat Datang Kembali</h1>
+    <p style="margin-bottom: 24px;">Silakan masuk dengan akun Anda untuk melihat dan membagikan cerita.</p>
+
+    <form id="loginForm" novalidate>
+      <fieldset>
+        <legend class="sr-only">Masuk ke akun</legend>
+
+        <div>
+          <label for="email">Alamat Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="nama@email.com"
+            required 
+            aria-required="true"
+          />
+        </div>
+
+        <div>
+          <label for="password">Password</label>
+          <div class="password-input-wrapper">
+            <input 
+              type="password" 
+              id="password" 
+              name="password"
+              placeholder="Masukkan password Anda"
+              required 
+              aria-required="true"
+            />
+            <button 
+              type="button" 
+              id="togglePassword" 
+              class="toggle-password-btn" 
+              aria-label="Tampilkan password"
+              title="Tampilkan/Sembunyikan password"
+            >
+              <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit">Masuk Akun</button>
+      </fieldset>
+
+      <!-- area feedback -->
+      <p id="loginMessage" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+`;
 
 const EYE_OPEN_SVG = `<svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`;
 const EYE_OFF_SVG = `<svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>`;

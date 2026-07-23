@@ -1,5 +1,28 @@
-import template from "./favorites-view.html?raw";
 import FavoritesPresenter from "./favorites-presenter";
+
+const template = `
+<section class="container" aria-labelledby="favorites-title">
+  <div class="section-header" style="display: flex; flex-direction: column; gap: 12px;">
+    <h1 id="favorites-title">Story Favorit (IndexedDB)</h1>
+    <p>Daftar cerita yang Anda simpan secara lokal. Dapat diakses sepenuhnya saat offline.</p>
+  </div>
+
+  <div style="margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <label for="searchFavorite" class="sr-only">Cari cerita favorit</label>
+    <input 
+      type="text" 
+      id="searchFavorite" 
+      placeholder="Cari cerita favorit berdasarkan deskripsi atau nama..." 
+      aria-label="Cari cerita favorit"
+      style="max-width: 400px;"
+    />
+  </div>
+
+  <ul id="favorite-story-list" class="story-list-grid" aria-live="polite" style="display: grid; gap: 24px; list-style: none;">
+    <p>Memuat cerita favorit...</p>
+  </ul>
+</section>
+`;
 
 export default class FavoritesPage {
   async render() {

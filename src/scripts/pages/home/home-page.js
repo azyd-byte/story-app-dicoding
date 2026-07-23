@@ -1,9 +1,26 @@
 import L from "leaflet";
 import HomePresenter from "./home-presenter";
-import template from "./home-view.html?raw";
 import { FavoriteStoryIdb } from "../../data/idb-helper";
 import { showToast } from "../../utils/toast";
 import { setupLeafletMarkerIcons } from "../../utils/map-icon";
+
+const template = `
+<section class="container" aria-labelledby="home-title">
+  <h1 id="home-title">Story List</h1>
+
+  <p id="map-desc">Peta yang menampilkan lokasi story pengguna</p>
+
+  <div
+    id="map"
+    aria-label="Peta lokasi story"
+    aria-describedby="map-desc"
+  ></div>
+
+  <ul id="story-list" aria-live="polite">
+    Loading...
+  </ul>
+</section>
+`;
 
 export default class HomePage {
   async render() {

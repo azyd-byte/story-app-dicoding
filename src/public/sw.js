@@ -47,6 +47,11 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
 
+  // ONLY CACHE HTTP AND HTTPS SCHEMES (ignore chrome-extension, etc.)
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    return;
+  }
+
   // Strategy for Story API & Images: Stale-While-Revalidate / Network First with Cache Fallback
   if (
     url.origin === "https://story-api.dicoding.dev" ||
