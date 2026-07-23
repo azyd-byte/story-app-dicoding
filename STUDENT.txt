@@ -1,2 +1,2 @@
-APP_URL=https://storyapp-dicoding-pwa.netlify.app
+APP_URL=https://storybymap.netlify.app/
 MAP_SERVICE_API_KEY=

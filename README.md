@@ -1,46 +1,53 @@
 # 📍 StoryApp - Progressive Web App (PWA) Berbagi Cerita Lokasi
 
-**StoryApp** adalah aplikasi web modern berbasis **Progressive Web App (PWA)** yang memungkinkan pengguna untuk membaca, menyimpan, dan membagikan cerita berbasis lokasi secara interaktif. Aplikasi ini dibangun sebagai submission **Proyek Kedua** pada kelas *Belajar Pengembangan Web Intermediate* di Dicoding.
+**StoryApp** adalah aplikasi web modern berbasis **Progressive Web App (PWA)** yang memungkinkan pengguna untuk membaca, menyimpan, dan membagikan cerita berbasis lokasi secara interaktif. Aplikasi ini dibangun sebagai submission **Proyek Kedua** pada kelas _Belajar Pengembangan Web Intermediate_ di Dicoding.
 
 ---
 
 ## ✨ Fitur Utama & Keunggulan
 
 ### 1. 🌐 Single Page Application (SPA) & Arsitektur MVP
+
 - **SPA & Hash Routing**: Navigasi antar halaman berjalan cepat tanpa reload halaman.
 - **View Transitions API**: Efek animasi perpindahan halaman yang halus.
-- **Arsitektur Model-View-Presenter (MVP)**: Pemisahan logika bisnis (*Presenter*) dan antarmuka (*View*) secara murni pada seluruh halaman (`Home`, `Login`, `Register`, `Add`, `Favorites`, `About`).
+- **Arsitektur Model-View-Presenter (MVP)**: Pemisahan logika bisnis (_Presenter_) dan antarmuka (_View_) secara murni pada seluruh halaman (`Home`, `Login`, `Register`, `Add`, `Favorites`, `About`).
 
 ### 2. 🗺️ Peta Digital Interaktif & Multiple Tile Layers
+
 - Menggunakan library **Leaflet.js** untuk menyajikan lokasi setiap cerita di peta digital.
 - **Multiple Tile Layers Control**: Pengguna dapat mengubah tampilan peta secara bebas antara:
-  - *OpenStreetMap*
-  - *Satellite (Esri)*
-  - *Topographic (OpenTopoMap)*
-  - *Carto Light*
+  - _OpenStreetMap_
+  - _Satellite (Esri)_
+  - _Topographic (OpenTopoMap)_
+  - _Carto Light_
 - Synchronized Marker: Mengklik kartu cerita akan memfokuskan lokasi di peta dan membuka popup.
 
 ### 3. 📸 Tambah Story Baru & Media Stream Kamera
+
 - Opsi upload file gambar dari galeri atau **mengambil foto langsung melalui Kamera (Media Stream API)**.
 - Fitur auto-compress gambar untuk memastikan ukuran file aman di bawah 1MB.
 - Pemilihan titik lokasi (Latitude & Longitude) langsung dengan mengklik posisi di peta.
 
 ### 4. 🔔 Web Push Notification (Advanced)
+
 - Terintegrasi dengan **REST API Push Notification Dicoding** menggunakan VAPID Public Key.
-- Service Worker menangani event `push` dan menyajikan notifikasi dinamis lengkap dengan ikon, badge, dan tombol *action* (*"Lihat Story"*).
+- Service Worker menangani event `push` dan menyajikan notifikasi dinamis lengkap dengan ikon, badge, dan tombol _action_ (_"Lihat Story"_).
 - Menangani `notificationclick` untuk mengarahkan pengguna ke halaman story terkait.
-- **Toggle Button Notification**: Tombol langganan real-time (*Notifikasi: On / Off*) pada baris navigasi utama.
+- **Toggle Button Notification**: Tombol langganan real-time (_Notifikasi: On / Off_) pada baris navigasi utama.
 
 ### 5. 📱 PWA & Dukungan Akses Offline (Advanced)
+
 - **Web App Manifest (`manifest.json`)**: Memuat konfigurasi PWA lengkap (nama, ikon maskable 192px & 512px, screenshot desktop & mobile, theme color, dan shortcuts).
-- **Dynamic Service Worker Caching (`sw.js`)**: Strategi *Stale-While-Revalidate* / *Network-First* yang menyimpan data cerita dan gambar dari API ke cache, sehingga aplikasi **tetap dapat diakses dan dibaca dalam keadaan offline**.
+- **Dynamic Service Worker Caching (`sw.js`)**: Strategi _Stale-While-Revalidate_ / _Network-First_ yang menyimpan data cerita dan gambar dari API ke cache, sehingga aplikasi **tetap dapat diakses dan dibaca dalam keadaan offline**.
 
 ### 6. 💾 IndexedDB & Offline Synchronization (Advanced)
+
 - Menggunakan library **`idb`** dengan 2 Object Stores:
   - **Story Favorit**: Pengguna dapat menyukai, menyimpan, memfilter/mencari, dan menghapus cerita favorit secara lokal.
   - **Offline Story Sync**: Saat perangkat **offline**, pengguna tetap dapat membuat cerita baru. Cerita disimpan di IndexedDB dan **secara otomatis di-sync ke server API** begitu koneksi internet pulih.
 
 ### 7. ♿ Aksesibilitas & Tampilan Responsif (WCAG Standards)
+
 - Menerapkan HTML5 Semantik (`<main>`, `<header>`, `<nav>`, `<section>`, `<article>`, `<fieldset>`, `<label>`).
 - Fitur **Skip to content** dan dukungan **Keyboard Navigation** (tabindex, focus-visible outline).
 - Layout responsif yang teruji pada layar Mobile (375px), Tablet (768px), dan Desktop (1024px+).
@@ -98,23 +105,28 @@ submission_proyek_pertama/
 ## 🚀 Cara Menjalankan Secara Lokal
 
 1. **Clone Repositori**:
+
    ```bash
-   git clone https://github.com/username/story-app.git
+   git clone https://github.com/azyd-byte/story-app-dicoding.git
    cd story-app
    ```
 
 2. **Install Dependensi**:
+
    ```bash
    npm install
    ```
 
 3. **Jalankan Development Server**:
+
    ```bash
    npm run dev
    ```
+
    Buka browser di `http://localhost:5173`.
 
 4. **Build untuk Produksi**:
+
    ```bash
    npm run build
    ```
@@ -129,11 +141,13 @@ submission_proyek_pertama/
 ## 🌐 Distribusi & Deployment
 
 Aplikasi ini telah didistribusikan secara publik dan dapat diakses pada:
-- **Deployment URL**: [https://storyapp-dicoding-pwa.netlify.app](https://storyapp-dicoding-pwa.netlify.app)
+
+- **Deployment URL**: [https://storybymap.netlify.app/](https://storybymap.netlify.app/)
 
 ---
 
 ## 👤 Pengembang
 
-Dibuat oleh **Zayadi**  
+Dibuat oleh **Zayadi**
+
 - **LinkedIn**: [linkedin.com/in/a-zayadi/](https://www.linkedin.com/in/a-zayadi/)
