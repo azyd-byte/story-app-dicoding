@@ -3,6 +3,7 @@ import { addStory } from "../../data/api";
 import { OfflineStoryIdb } from "../../data/idb-helper";
 import { showToast } from "../../utils/toast";
 import { setupLeafletMarkerIcons } from "../../utils/map-icon";
+import Swal from "sweetalert2";
 
 async function fileToSerializable(file) {
   if (!file) return null;
@@ -136,33 +137,59 @@ export default class AddPresenter {
         lat: this.selectedLat,
         lon: this.selectedLon,
       });
-      showToast("Story disimpan di IndexedDB (Offline)! Akan ter-sync saat online.", "success");
-      setTimeout(() => {
+      
+      Swal.fire({
+        icon: "success",
+        title: "Disimpan Offline",
+        text: "Koneksi offline detected. Story disimpan ke local storage (IndexedDB) dan akan di-sync otomatis saat online!",
+        confirmButtonColor: "var(--primary)",
+      }).then(() => {
         location.hash = "/";
-      }, 1000);
+      });
     } catch (err) {
       console.error("Gagal menyimpan story ke IndexedDB:", err);
-      showToast("Gagal menyimpan story offline: " + (err.message || err), "error");
+      Swal.fire({
+        icon: "error",
+        title: "Gagal Menyimpan Offline",
+        text: "Error: " + (err.message || err),
+        confirmButtonColor: "#ef4444",
+      });
     }
   }
 
   async submitStory({ description, uploadedFile }) {
     const token = localStorage.getItem("token");
     if (!token) {
-      showToast("Sesi login berakhir. Silakan login kembali.", "error");
-      location.hash = "/login";
+      Swal.fire({
+        icon: "error",
+        title: "Sesi Berakhir",
+        text: "Sesi login Anda berakhir. Silakan login kembali.",
+        confirmButtonColor: "#ef4444",
+      }).then(() => {
+        location.hash = "/login";
+      });
       return;
     }
 
     const file = uploadedFile || this.capturedFile;
 
     if (!file) {
-      showToast("Unggah foto atau ambil foto dari kamera terlebih dahulu!", "info");
+      Swal.fire({
+        icon: "info",
+        title: "Foto Wajib",
+        text: "Unggah foto atau ambil foto dari kamera terlebih dahulu!",
+        confirmButtonColor: "var(--primary)",
+      });
       return;
     }
 
     if (!description || !description.trim()) {
-      showToast("Deskripsi cerita tidak boleh kosong!", "info");
+      Swal.fire({
+        icon: "info",
+        title: "Deskripsi Wajib",
+        text: "Deskripsi cerita tidak boleh kosong!",
+        confirmButtonColor: "var(--primary)",
+      });
       return;
     }
 
@@ -170,6 +197,15 @@ export default class AddPresenter {
       await this.saveStoryOffline(description, file);
       return;
     }
+
+    Swal.fire({
+      title: "Membagikan Story",
+      text: "Mohon tunggu, sedang mengunggah cerita Anda...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
     const formData = new FormData();
     formData.append("description", description.trim());
@@ -189,10 +225,17 @@ export default class AddPresenter {
       const result = await addStory(formData, token);
 
       if (!result.error) {
-        showToast("Story berhasil ditambahkan!", "success");
+        Swal.fire({
+          icon: "success",
+          title: "Story Berhasil Dibagikan!",
+          text: "Cerita Anda berhasil dipublikasikan.",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
         setTimeout(() => {
           location.hash = "/";
-        }, 1000);
+        }, 1500);
       } else {
         console.warn("API error response:", result.message);
         await this.saveStoryOffline(description, file);

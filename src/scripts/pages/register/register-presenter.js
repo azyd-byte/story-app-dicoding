@@ -1,4 +1,5 @@
 import { register } from "../../data/api";
+import Swal from "sweetalert2";
 
 export default class RegisterPresenter {
   constructor({ view }) {
@@ -7,24 +8,49 @@ export default class RegisterPresenter {
 
   async onRegister({ name, email, password }) {
     if (!name || !name.trim()) {
-      this.view.showMessage("Nama wajib diisi.");
-      this.view.focusField("name");
+      Swal.fire({
+        icon: "warning",
+        title: "Input Tidak Lengkap",
+        text: "Nama wajib diisi.",
+        confirmButtonColor: "var(--primary)",
+      }).then(() => {
+        this.view.focusField("name");
+      });
       return;
     }
 
     if (!email || !email.trim()) {
-      this.view.showMessage("Email wajib diisi.");
-      this.view.focusField("email");
+      Swal.fire({
+        icon: "warning",
+        title: "Input Tidak Lengkap",
+        text: "Email wajib diisi.",
+        confirmButtonColor: "var(--primary)",
+      }).then(() => {
+        this.view.focusField("email");
+      });
       return;
     }
 
     if (!password || password.length < 8) {
-      this.view.showMessage("Password minimal 8 karakter.");
-      this.view.focusField("password");
+      Swal.fire({
+        icon: "warning",
+        title: "Password Lemah",
+        text: "Password minimal harus memiliki panjang 8 karakter.",
+        confirmButtonColor: "var(--primary)",
+      }).then(() => {
+        this.view.focusField("password");
+      });
       return;
     }
 
-    this.view.showMessage("Memproses registrasi...");
+    Swal.fire({
+      title: "Memproses Registrasi",
+      text: "Mohon tunggu sebentar...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
     try {
       const result = await register({
@@ -34,16 +60,33 @@ export default class RegisterPresenter {
       });
 
       if (!result.error) {
-        this.view.showMessage("Register berhasil! Silakan login.");
+        Swal.fire({
+          icon: "success",
+          title: "Registrasi Berhasil!",
+          text: "Akun Anda telah berhasil dibuat. Silakan login.",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        
         setTimeout(() => {
           location.hash = "/login";
-        }, 1000);
+        }, 1500);
       } else {
-        this.view.showMessage(result.message);
+        Swal.fire({
+          icon: "error",
+          title: "Registrasi Gagal",
+          text: result.message || "Gagal membuat akun. Silakan coba lagi.",
+          confirmButtonColor: "#ef4444",
+        });
       }
     } catch (error) {
       console.error(error);
-      this.view.showMessage("Terjadi kesalahan jaringan. Coba lagi.");
+      Swal.fire({
+        icon: "error",
+        title: "Kesalahan Jaringan",
+        text: "Terjadi kesalahan jaringan atau server tidak merespons. Coba lagi.",
+        confirmButtonColor: "#ef4444",
+      });
     }
   }
 }

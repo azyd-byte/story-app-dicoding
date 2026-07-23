@@ -9,6 +9,7 @@ import {
   togglePushSubscription,
 } from "./utils/sw-register";
 import { initOfflineSyncListener, syncOfflineStories } from "./utils/offline-sync";
+import Swal from "sweetalert2";
 
 function updateNav() {
   const token = localStorage.getItem("token");
@@ -22,10 +23,10 @@ function updateNav() {
   if (token) {
     login.style.display = "none";
     register.style.display = "none";
-    logout.style.display = "block";
+    logout.style.display = "flex";
   } else {
-    login.style.display = "block";
-    register.style.display = "block";
+    login.style.display = "flex";
+    register.style.display = "flex";
     logout.style.display = "none";
   }
 }
@@ -41,10 +42,31 @@ function setupLogout() {
 
   newLogoutBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
-    setTimeout(() => {
-      location.hash = "/login";
-    }, 50);
+    
+    Swal.fire({
+      title: "Konfirmasi Keluar",
+      text: "Apakah Anda yakin ingin keluar dari akun Anda?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Keluar",
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "var(--text-muted)",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        Swal.fire({
+          icon: "success",
+          title: "Logout Berhasil",
+          text: "Anda telah keluar.",
+          timer: 1000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => {
+          location.hash = "/login";
+        }, 1000);
+      }
+    });
   });
 }
 
