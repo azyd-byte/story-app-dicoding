@@ -1,0 +1,67 @@
+{
+  "name": "StoryApp - PWA Berbagi Cerita",
+  "short_name": "StoryApp",
+  "description": "Aplikasi berbagi cerita berbasis lokasi dan foto",
+  "start_url": "/#/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tampilan Beranda StoryApp Desktop"
+    },
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tampilan Beranda StoryApp Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tambah Story",
+      "short_name": "Tambah",
+      "description": "Tambah cerita lokasi baru",
+      "url": "/#/add",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Story Favorit",
+      "short_name": "Favorit",
+      "description": "Lihat cerita favorit tersimpan",
+      "url": "/#/favorites",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

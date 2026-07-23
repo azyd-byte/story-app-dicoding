@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#4f46e5" />
+    <title>StoryApp</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="module" src="/scripts/index.js"></script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <header class="app-header">
+      <div class="main-header container">
+        <a class="brand-name" href="#/">StoryApp</a>
+
+        <nav
+          id="navigation-drawer"
+          class="navigation-drawer"
+          aria-label="Main Navigation"
+        >
+          <ul id="nav-list" class="nav-list">
+            <li><a href="#/">Beranda</a></li>
+            <li><a href="#/favorites">Favorit</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/add">Tambah Story</a></li>
+            <li><a href="#/login" id="nav-login">Login</a></li>
+            <li><a href="#/register" id="nav-register">Register</a></li>
+            <li>
+              <a href="#" id="nav-logout" style="display: none">Logout</a>
+            </li>
+            <li>
+              <button 
+                id="push-notification-btn" 
+                class="btn-push-toggle" 
+                aria-label="Toggle Langganan Push Notification"
+                style="background: transparent; border: 1px solid var(--primary); color: var(--primary); font-size: 0.85rem; padding: 6px 12px;"
+              >
+                Notifikasi: Off
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <button
+          id="drawer-button"
+          class="drawer-button"
+          aria-label="Buka menu navigasi"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content" tabindex="-1"></main>
+  </body>
+</html>

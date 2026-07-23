@@ -1,0 +1,44 @@
+<section class="container" aria-labelledby="add-title">
+  <div class="form-card" style="max-width: 640px;">
+    <h1 id="add-title">Tambah Story Baru</h1>
+    <p style="margin-bottom: 24px;">Bagikan cerita beserta foto dan lokasi Anda.</p>
+
+    <form id="storyForm">
+      <div>
+        <label for="description">Deskripsi Cerita</label>
+        <textarea id="description" placeholder="Tuliskan cerita menarik Anda di sini..." required></textarea>
+      </div>
+
+      <div>
+        <label for="photo">Upload File Gambar</label>
+        <input type="file" id="photo" accept="image/*" />
+      </div>
+
+      <div style="margin-block: 16px;">
+        <label>Atau Ambil Foto dari Kamera</label>
+        <button type="button" id="openCamera" aria-label="Buka kamera untuk mengambil foto" style="margin-top: 6px; width: 100%;">
+          Buka Kamera
+        </button>
+      </div>
+
+      <div class="camera-container" style="display: none;" id="cameraWrapper">
+        <video id="video" width="360" autoplay style="display:none;" aria-label="Preview kamera"></video>
+        <canvas id="canvas" style="display:none;" aria-label="Hasil foto"></canvas>
+        <button type="button" id="capture" style="display:none; margin-top: 8px;">Ambil Foto</button>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <label id="mapLabel">Pilih Lokasi di Peta</label>
+        <p id="mapHelp" style="font-size: 0.85rem; margin-bottom: 8px;">Klik pada titik peta di bawah untuk menentukan lokasi cerita Anda.</p>
+        <div id="map" aria-describedby="mapHelp" style="height: 300px;"></div>
+
+        <div class="location-chips">
+          <span class="chip">Latitude: <strong id="lat">-</strong></span>
+          <span class="chip">Longitude: <strong id="lon">-</strong></span>
+        </div>
+      </div>
+
+      <button type="submit">Bagikan Story</button>
+    </form>
+  </div>
+</section>

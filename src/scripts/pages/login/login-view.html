@@ -1,0 +1,52 @@
+<section class="container" aria-labelledby="login-title">
+  <div class="form-card">
+    <h1 id="login-title">Selamat Datang Kembali</h1>
+    <p style="margin-bottom: 24px;">Silakan masuk dengan akun Anda untuk melihat dan membagikan cerita.</p>
+
+    <form id="loginForm" novalidate>
+      <fieldset>
+        <legend class="sr-only">Masuk ke akun</legend>
+
+        <div>
+          <label for="email">Alamat Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="nama@email.com"
+            required 
+            aria-required="true"
+          />
+        </div>
+
+        <div>
+          <label for="password">Password</label>
+          <div class="password-input-wrapper">
+            <input 
+              type="password" 
+              id="password" 
+              name="password"
+              placeholder="Masukkan password Anda"
+              required 
+              aria-required="true"
+            />
+            <button 
+              type="button" 
+              id="togglePassword" 
+              class="toggle-password-btn" 
+              aria-label="Tampilkan password"
+              title="Tampilkan/Sembunyikan password"
+            >
+              <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit">Masuk Akun</button>
+      </fieldset>
+
+      <!-- area feedback -->
+      <p id="loginMessage" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
