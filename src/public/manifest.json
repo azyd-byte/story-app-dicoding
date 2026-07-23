@@ -1,8 +1,10 @@
 {
+  "id": "/",
   "name": "StoryApp - PWA Berbagi Cerita",
   "short_name": "StoryApp",
   "description": "Aplikasi berbagi cerita berbasis lokasi dan foto",
-  "start_url": "/#/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
